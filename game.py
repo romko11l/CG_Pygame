@@ -255,6 +255,17 @@ class Stakes:
             return False
 
 
+class Hearts:
+
+    def __init__(self, img='./resources/another_static/heart.png'):
+        self.number_of_lives = 3
+        self.heart_img = pygame.image.load(img)
+
+    def draw(self):
+        for i in range(self.number_of_lives):
+            window.blit(self.heart_img, (TileSize*i, 0))
+
+
 def circle_surf(radius, color):
     surf = pygame.Surface((radius * 2, radius * 2))
     pygame.draw.circle(surf, color, (radius, radius), radius)
@@ -333,13 +344,15 @@ def move(x, y, curr_room, hero, enemy=None):
     if enemy is not None:
         if enemy.is_collision_with_player(x, y):
             raise Exception("Hero is dead")     
-    return x, y        
+    return x, y    
 
    
 if __name__ == '__main__':
     maze = Maze('maze_layout.txt')
 
     hero = pygame.image.load('./resources/characters/knight1.png')
+
+    lives = Hearts()
 
     hero_is_dead = False
     is_victory = False
@@ -363,10 +376,18 @@ if __name__ == '__main__':
 
         if not hero_is_dead:        
             try:
+                lives.draw()
                 x, y = move(x, y, curr_room, hero, enemy)
             except Exception as err:
                 if err.args[0] == 'Hero is dead':
-                    hero_is_dead = True
+                    if lives.number_of_lives == 0: 
+                        hero_is_dead = True
+                    else:
+                        lives.number_of_lives -= 1
+                        curr_room = maze.get_first_room()
+                        x, y = curr_room.get_start_position()
+                        maze.curr_room = 0
+                        enemy = maze.get_enemy()
                 elif err.args[0] == 'Exit from room':
                     print(x,y, maze.curr_room)
                     direction = maze.get_direction(x,y)
