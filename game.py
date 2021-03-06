@@ -165,7 +165,6 @@ class Room:
         return False    
 
     def get_start_position(self):
-        print(len(self.layout[1][1]))
         for i in range(len(self.layout)):
             for j in range(len(self.layout[i])):
                 if self.layout[i][j] == '@':
@@ -359,7 +358,6 @@ if __name__ == '__main__':
 
     curr_room = maze.get_first_room()
 
-    print(curr_room.get_start_position())
     x, y = curr_room.get_start_position()
 
     speed = 8
@@ -389,7 +387,6 @@ if __name__ == '__main__':
                         maze.curr_room = 0
                         enemy = maze.get_enemy()
                 elif err.args[0] == 'Exit from room':
-                    print(x,y, maze.curr_room)
                     direction = maze.get_direction(x,y)
                     curr_room = maze.get_next_room(direction)
                     enemy = maze.get_enemy()
@@ -397,8 +394,7 @@ if __name__ == '__main__':
                     if direction == 'left':
                         x = int(1080 - TileSize*3) # почему-то нельзя ставить 1080 - происходит баг - исчезает персонаж
                     elif direction == 'right':
-                        x = 0
-                    print(x,y, maze.curr_room)     
+                        x = 0   
                 elif err.args[0] == 'Exit from maze':
                     is_victory = True
                     hero_is_dead = True                  
