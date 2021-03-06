@@ -28,7 +28,7 @@ class Maze:
         self.curr_room = 0
 
     def get_first_room(self):
-        new_room = Room(floor_image='./resources/background/white_stone.jpg', wall_image='./resources/walls/wall.jpg',
+        new_room = Room(floor_image='./resources/background/fortress_floor.jpg', wall_image='./resources/walls/fortress_wall.png',
                         lava_image='./resources/traps/lava.png', room_layout='./resources/rooms_layout/B_room_layout.txt')
         return new_room        
         
@@ -41,7 +41,7 @@ class Maze:
             new_room = Room(floor_image='./resources/background/black_stone.jpg', wall_image='./resources/walls/wall.jpg',
                             lava_image='./resources/traps/lava.png', room_layout='./resources/rooms_layout/A_room_layout.txt')
         elif self.layout[self.curr_room] == 'B':
-            new_room = Room(floor_image='./resources/background/white_stone.jpg', wall_image='./resources/walls/wall.jpg',
+            new_room = Room(floor_image='./resources/background/fortress_floor.jpg', wall_image='./resources/walls/fortress_wall.png',
                             lava_image='./resources/traps/lava.png', room_layout='./resources/rooms_layout/B_room_layout.txt')
         elif self.layout[self.curr_room] == 'C':
             new_room = Room(floor_image='./resources/background/black_stone.jpg', wall_image='./resources/walls/wall.jpg',
